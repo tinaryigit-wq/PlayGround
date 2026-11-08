@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#8ed8de">
+<title>Bird Biz — Feather Fortune</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ffca58'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-size='42'%3E%F0%9F%AA%B6%3C/text%3E%3C/svg%3E">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap');
+:root{--ink:#243544;--cream:#fff8e9;--orange:#f07843;--teal:#267c7c;--mint:#d7f0dc;--gold:#ffcc58}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9f1e8;color:var(--ink);font-family:'DM Sans',sans-serif;user-select:none;-webkit-tap-highlight-color:transparent}body{display:grid;place-items:center}.game{position:relative;width:min(100vw,1440px,160dvh);height:min(100dvh,900px,62.5vw);aspect-ratio:16/10;overflow:hidden;background:#91d9d8;box-shadow:0 20px 70px #325b5b35}.game:after{content:'';position:absolute;inset:0;pointer-events:none;border:1px solid #fff8}
+canvas{width:100%;height:100%;display:block;touch-action:none}.topbar{position:absolute;top:18px;left:20px;right:20px;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}.brand,.stat{background:#fff8e9ed;border:2px solid #fff;border-radius:17px;box-shadow:0 5px 0 #25465018}.brand{padding:9px 16px 8px;display:flex;align-items:center;gap:10px}.brand-icon{width:38px;height:38px;border-radius:12px;background:#ffca58;display:grid;place-items:center;font-size:23px;box-shadow:inset 0 -3px #e6a936}.brand strong{font:700 19px Fredoka,sans-serif;letter-spacing:.3px;display:block}.brand small{font-size:10px;color:#6b7779;letter-spacing:1.6px;font-weight:800}.stats{display:flex;gap:9px}.stat{padding:9px 15px;min-width:100px}.stat small{font-weight:800;font-size:10px;color:#849091;letter-spacing:1px;text-transform:uppercase;display:block}.stat b{font:700 20px Fredoka,sans-serif;display:block;margin-top:1px}.stat.cash b{color:#238467}.stat.bag b{color:#e57943}.day{position:absolute;left:50%;top:26px;transform:translateX(-50%);background:#285e65;color:#fdf4d7;border-radius:99px;padding:8px 15px;font-size:11px;font-weight:800;letter-spacing:1.4px;box-shadow:0 4px 0 #174b5133;pointer-events:none}.controls{position:absolute;bottom:20px;left:20px;right:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}.hint{background:#fff8e9e8;border:2px solid white;padding:10px 14px;border-radius:13px;font-size:12px;font-weight:700;color:#667576;box-shadow:0 4px 0 #25465016}.right-controls{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:14px;padding:13px 18px;font:700 14px 'DM Sans',sans-serif;color:white;background:#267c7c;box-shadow:0 5px 0 #185b5d,0 8px 14px #214c4b26;cursor:pointer;transition:transform .12s,filter .12s;touch-action:manipulation}.btn:hover{filter:brightness(1.08);transform:translateY(-2px)}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #185b5d}.btn.orange{background:#f07843;box-shadow:0 5px 0 #c95931,0 8px 14px #81452d20}.btn.gold{background:#e8aa32;box-shadow:0 5px 0 #ba7c22,0 8px 14px #81452d20}.btn.dark{background:#36575a;box-shadow:0 5px 0 #254347}.btn .key{opacity:.7;font-size:10px;margin-left:7px}.ammo{position:absolute;bottom:91px;left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:7px 10px;border-radius:12px;background:#fff8e9db;pointer-events:none}.shell{width:14px;height:20px;border-radius:7px 7px 4px 4px;background:#e9b64d;box-shadow:inset 0 -5px #c78436}.shell.empty{background:#b8c2bb;box-shadow:inset 0 -5px #909c96}.toast{position:absolute;left:50%;top:22%;transform:translate(-50%,-10px);background:#fff8e9;color:#284247;font:700 19px Fredoka,sans-serif;padding:12px 20px;border-radius:15px;box-shadow:0 6px 0 #315c5e22;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}.panel-shade{position:absolute;inset:0;background:#153b3e50;display:none;align-items:center;justify-content:center;padding:18px}.panel-shade.open{display:flex}.panel{width:min(560px,100%);background:#fff8e9;border:4px solid white;border-radius:25px;padding:25px;box-shadow:0 12px 0 #24545529;max-height:92%;overflow:auto}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}.panel h2{font:700 30px Fredoka,sans-serif;margin:0 0 4px}.panel p{font-size:13px;color:#788583;margin:0;line-height:1.5}.close{border:0;background:#f1e8d5;color:#687575;border-radius:11px;width:36px;height:36px;font-size:21px;cursor:pointer}.sellbox{display:flex;justify-content:space-between;align-items:center;background:#e5f2dc;border-radius:15px;padding:14px 16px;margin:17px 0}.sellbox strong{font:700 18px Fredoka,sans-serif}.sellbox span{font-size:12px;color:#708278;display:block;margin-top:2px}.upgrade-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.upgrade{background:white;border:2px solid #efe8d8;border-radius:16px;padding:13px;text-align:left;min-height:110px;cursor:pointer;color:var(--ink);transition:.15s}.upgrade:hover{border-color:#f0b848;transform:translateY(-2px)}.upgrade:disabled{opacity:.48;cursor:default;transform:none}.upgrade .icon{font-size:23px}.upgrade strong{font:700 15px Fredoka,sans-serif;display:block;margin:5px 0 2px}.upgrade small{font-size:11px;color:#77827f;line-height:1.3;display:block}.upgrade em{display:block;color:#218066;font-style:normal;font-size:12px;font-weight:800;margin-top:8px}.market-footer{display:flex;justify-content:space-between;align-items:center;margin-top:15px;font-size:11px;color:#7e8984}.touch-shoot{display:none}.mobile-tip{display:none}
+@media(max-width:700px){.game{width:100vw;height:100dvh;aspect-ratio:auto}.topbar{top:10px;left:10px;right:10px}.brand{padding:6px 9px;gap:6px;border-radius:13px}.brand-icon{width:31px;height:31px;font-size:18px;border-radius:9px}.brand strong{font-size:15px}.brand small{font-size:8px}.stats{gap:5px}.stat{min-width:65px;padding:7px 9px;border-radius:12px}.stat small{font-size:8px}.stat b{font-size:16px}.day{top:67px;font-size:9px;padding:6px 10px}.controls{bottom:12px;left:10px;right:10px;align-items:flex-end}.hint{font-size:10px;padding:8px 9px;max-width:45%;line-height:1.3}.btn{padding:12px 13px;font-size:12px;border-radius:12px}.right-controls{gap:7px}.ammo{bottom:73px}.toast{top:19%;font-size:16px}.panel{padding:18px}.panel h2{font-size:26px}.upgrade-list{gap:7px}.upgrade{padding:10px;min-height:105px}.upgrade .icon{font-size:20px}.upgrade strong{font-size:13px}.upgrade small{font-size:10px}.touch-shoot{display:block}.key{display:none}}
+@media(max-width:390px){.hint{display:none}.controls{justify-content:flex-end}.stats .stat{min-width:57px}.brand{padding-right:7px}.right-controls{gap:6px}.btn{padding:11px}}
+</style>
+</head>
+<body>
+<main class="game" id="game">
+<canvas id="scene" aria-label="Bird Biz game scene"></canvas>
+<header class="topbar"><div class="brand"><div class="brand-icon">🪶</div><div><strong>Bird Biz</strong><small>FEATHER FORTUNE</small></div></div><div class="day" id="day">DAY 1 · THE OPENING FLIGHT</div><div class="stats"><div class="stat cash"><small>Pocket</small><b id="cash">$0</b></div><div class="stat bag"><small>Birds</small><b id="bag">0 / 6</b></div></div></header>
+<div class="ammo" id="ammo"></div><div class="toast" id="toast"></div>
+<div class="controls"><div class="hint" id="hint">Move your mouse to aim · Click to pop!<br><span style="color:#c78345">Space</span> to shoot &nbsp;·&nbsp; <span style="color:#c78345">R</span> reload</div><div class="right-controls"><button class="btn dark" id="reload">↻ Reload <span class="key">R</span></button><button class="btn orange" id="turn">Turn right → <span class="key">E</span></button><button class="btn orange touch-shoot" id="shoot">POP!</button></div></div>
+<div class="panel-shade" id="market"><section class="panel"><div class="panel-head"><div><h2>🌻 The Feather Exchange</h2><p>Freshly caught, ethically... well, cartoonishly sourced.</p></div><button class="close" id="closeMarket" aria-label="Close market">×</button></div><div class="sellbox"><div><strong>Your basket: <b id="marketCount">0</b> birds</strong><span id="saleNote">Sell your haul and fund the next flight.</span></div><button class="btn gold" id="sell">Sell all · $0</button></div><h3 style="font:700 16px Fredoka;margin:18px 0 10px">Field upgrades</h3><div class="upgrade-list" id="upgrades"></div><div class="market-footer"><span>Tip: bigger baskets mean bigger paydays.</span><span id="marketCash">💰 $0</span></div><div style="text-align:right;margin-top:15px"><button class="btn" id="backHunt">Back to the field →</button></div></section></div>
+</main>
+<script>
+(()=>{
+const canvas=document.getElementById('scene'),ctx=canvas.getContext('2d'), game=document.getElementById('game');
+const $=id=>document.getElementById(id);
+const upgrades=[
+ {id:'bag',icon:'🧺',name:'Bigger Basket',desc:'Carry two extra birds per trip.',base:24,max:3},
+ {id:'scope',icon:'🎯',name:'Wobbly Scope',desc:'A friendlier hit zone. Very scientific.',base:32,max:3},
+ {id:'shells',icon:'💥',name:'Extra Pockets',desc:'Pack two extra shells before reloading.',base:28,max:3},
+ {id:'price',icon:'🪙',name:'Silver Tongue',desc:'Talk the buyer into paying more.',base:40,max:3},
+];
+let W=1000,H=625,dpr=1,last=0,scene='field', cash=0, caught=0,day=1,capacity=6,clip=6,clipMax=6,shotRadius=38,priceBonus=0,levels={bag:0,scope:0,shells:0,price:0},birds=[],particles=[],shots=[], aim={x:500,y:300},cooldown=0,spawnTimer=0,toastTimer=0,marketOpen=false,turnProgress=0;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function resize(){const rect=game.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);W=1000;H=625;ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0)}
+new ResizeObserver(resize).observe(game);resize();
+function rounded(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
+function ellipse(x,y,rx,ry,c){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=c;ctx.fill()}
+function line(x1,y1,x2,y2,c,w=2){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=c;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke()}
+function text(s,x,y,size,color,font='700 18px Fredoka',align='center'){ctx.fillStyle=color;ctx.font=font;ctx.textAlign=align;ctx.fillText(s,x,y)}
+function rand(a,b){return a+Math.random()*(b-a)}
+function spawn(){let fromLeft=Math.random()<.5;let y=rand(115,365);birds.push({x:fromLeft?-55:W+55,y,baseY:y,speed:rand(48,100)*(fromLeft?1:-1),phase:rand(0,7),scale:rand(.8,1.18),color:['#f5cb57','#e88b64','#8dc17c','#af91ca','#f0a34d'][Math.floor(Math.random()*5)],type:Math.random()<.22?'fancy':'plain',alive:true})}
+for(let i=0;i<5;i++){spawn();birds[i].x=rand(100,900);birds[i].y=rand(145,330)}
+function drawBird(b,t){let x=b.x,y=b.y+Math.sin(t*3+b.phase)*7,s=b.scale,c=b.color;ctx.save();ctx.translate(x,y);ctx.scale(s, s);let dir=b.speed>=0?1:-1;ctx.scale(dir,1);
+// tiny cartoon feet
+line(-4,15,-5,21,'#d47743',2);line(5,15,5,21,'#d47743',2);line(-8,21,-2,21,'#d47743',2);line(2,21,8,21,'#d47743',2);
+// flapping wing
+let flap=Math.sin(t*11+b.phase)*.42;ctx.save();ctx.translate(-3,1);ctx.rotate(flap);ellipse(-3,-8,12,7,'#ffffffaa');ellipse(-5,-8,8,4,c);ctx.restore();
+ellipse(0,0,18,14,c);ellipse(12,-7,11,10,c);ellipse(14,-7,4,4,'#fff');ellipse(15,-7,1.8,2,'#273b3a');ctx.beginPath();ctx.moveTo(22,-6);ctx.lineTo(32,-2);ctx.lineTo(22,1);ctx.closePath();ctx.fillStyle='#ed8145';ctx.fill();ellipse(-10,2,6,3,'#ffffff55');
+if(b.type==='fancy'){ctx.fillStyle='#ee6f72';ctx.beginPath();ctx.arc(12,-17,4,Math.PI,0);ctx.lineTo(20,-15);ctx.lineTo(11,-15);ctx.fill()}
+ctx.restore()}
+function drawCloud(x,y,s){ctx.fillStyle='#fff9e9a8';ellipse(x,y,32*s,12*s,ctx.fillStyle);ellipse(x-19*s,y+2*s,17*s,9*s,ctx.fillStyle);ellipse(x+18*s,y+2*s,20*s,10*s,ctx.fillStyle)}
+function drawField(t){let sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#78cbd0');sky.addColorStop(.64,'#c7e6bd');sky.addColorStop(1,'#e8d58a');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+// sun
+ellipse(820,120,43,43,'#ffdc75');ellipse(820,120,52,52,'#ffdc7533');
+drawCloud(145+(t*5%1150),116,.9);drawCloud(520-(t*3%1100),183,.68);
+// far hills
+ctx.fillStyle='#88bf88';ctx.beginPath();ctx.moveTo(0,380);ctx.quadraticCurveTo(170,285,340,368);ctx.quadraticCurveTo(540,260,760,363);ctx.quadraticCurveTo(895,301,1000,345);ctx.lineTo(1000,625);ctx.lineTo(0,625);ctx.fill();
+ctx.fillStyle='#5eaa78';ctx.beginPath();ctx.moveTo(0,440);ctx.quadraticCurveTo(180,350,380,433);ctx.quadraticCurveTo(590,350,755,434);ctx.quadraticCurveTo(890,376,1000,410);ctx.lineTo(1000,625);ctx.lineTo(0,625);ctx.fill();
+// distant cottage
+rounded(80,315,94,83,4,'#e9b77d');ctx.beginPath();ctx.moveTo(67,319);ctx.lineTo(127,273);ctx.lineTo(190,319);ctx.closePath();ctx.fillStyle='#cb7653';ctx.fill();rounded(115,348,24,50,3,'#8e6650');rounded(91,332,19,19,3,'#fff0aa');rounded(148,332,17,19,3,'#fff0aa');
+// field rows
+ctx.fillStyle='#d9c477';ctx.beginPath();ctx.moveTo(0,445);ctx.quadraticCurveTo(480,399,1000,450);ctx.lineTo(1000,625);ctx.lineTo(0,625);ctx.fill();
+for(let i=0;i<21;i++){let x=i*53+(i%2)*18,y=randStable(i,480,555);line(x,y,x-13,y-26,'#678e50',2);ellipse(x-14,y-28,8,7,'#ffdb68');ellipse(x-9,y-30,7,6,'#f5bf51');ellipse(x-15,y-33,6,6,'#ffec92')}
+// fence
+for(let i=0;i<9;i++){let x=35+i*120;rounded(x,421,8,72,3,'#f4dfac');ellipse(x+4,421,4,4,'#f4dfac')}line(0,439,1000,439,'#f4dfac',7);line(0,465,1000,465,'#f4dfac',6);
+// grass foreground tufts
+for(let i=0;i<26;i++){let x=(i*83+17)%1000,y=randStable(i+80,535,620);line(x,y,x-4,y-13,'#769451',2);line(x,y,x+4,y-16,'#769451',2)}
+// weapon/cartoon hand, aligned toward cursor but stay bottom
+let dx=aim.x-500,dy=aim.y-565,ang=Math.atan2(dy,dx);ctx.save();ctx.translate(500,566);ctx.rotate(ang);rounded(-24,-15,92,31,9,'#925636');rounded(48,-11,123,23,7,'#526669');rounded(136,-8,33,17,5,'#45595c');ellipse(-4,0,21,18,'#f0b887');ctx.restore();
+}
+function randStable(i,min,max){let n=Math.sin(i*127.1+311.7)*43758.5453;return min+(n-Math.floor(n))*(max-min)}
+function drawMarket(t){let sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#abd9c6');sky.addColorStop(1,'#e6d6a0');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+// market building
+rounded(175,114,650,408,20,'#fff1d2');ctx.fillStyle='#ce7350';ctx.beginPath();ctx.moveTo(145,160);ctx.lineTo(500,70);ctx.lineTo(855,160);ctx.closePath();ctx.fill();ctx.fillStyle='#f0bd63';for(let i=0;i<7;i++){ctx.beginPath();ctx.moveTo(176+i*94,154);ctx.lineTo(223+i*94,141);ctx.lineTo(223+i*94,191);ctx.lineTo(176+i*94,191);ctx.closePath();ctx.fillStyle=i%2?'#f7d985':'#f3a75c';ctx.fill()}
+rounded(241,204,518,282,10,'#f5dfb5');rounded(279,224,182,214,6,'#89b7a8');rounded(493,224,224,214,6,'#c18a61');
+// panes and shelves
+line(370,225,370,436,'#fff1d2',6);line(281,330,460,330,'#fff1d2',6);rounded(509,278,191,12,4,'#744e3d');rounded(509,350,191,12,4,'#744e3d');
+// colorful jars
+for(let i=0;i<5;i++){rounded(520+i*34,246,21,29,6,['#ed8c61','#83bd91','#e5bd51','#b393ca','#ed8c61'][i]);rounded(516+i*35,239,28,8,3,'#f6ead1')}
+for(let i=0;i<4;i++){rounded(524+i*42,311,28,29,6,['#89b9c5','#f1bb59','#d68570','#94bf8a'][i]);ellipse(539+i*42,310,8,8,'#f4e3b4')}
+// awning signage
+rounded(393,158,214,40,9,'#fff5dc');text('THE FEATHER EXCHANGE',500,184,19,'#41645d','700 18px Fredoka');
+// shopkeeper
+ellipse(827,392,49,60,'#e99b73');ellipse(827,333,37,37,'#e99b73');ctx.beginPath();ctx.arc(827,334,39,Math.PI,Math.PI*2);ctx.fillStyle='#6c5544';ctx.fill();ellipse(814,336,3,4,'#263f42');ellipse(840,336,3,4,'#263f42');ctx.beginPath();ctx.arc(827,347,10,0.2,2.9);ctx.strokeStyle='#a94f49';ctx.lineWidth=3;ctx.stroke();rounded(786,370,83,67,17,'#5d9b8a');rounded(799,382,56,13,6,'#e4c15d');
+// basket prop
+rounded(84,446,125,78,13,'#b7794c');ctx.fillStyle='#d59c62';ctx.beginPath();ctx.ellipse(147,445,63,18,0,0,Math.PI*2);ctx.fill();for(let i=0;i<4;i++)line(96+i*29,449,106+i*23,504,'#f0c985',4);text('FRESH!',147,483,15,'#fff5dc','700 15px Fredoka');
+ctx.fillStyle='#719757';ctx.fillRect(0,520,W,105);for(let i=0;i<20;i++){let x=i*53;line(x,542,x-5,526,'#648b4e',2);line(x,542,x+5,525,'#648b4e',2)}
+}
+function updateUI(){ $('cash').textContent='$'+cash; $('bag').textContent=`${caught} / ${capacity}`; $('marketCount').textContent=caught; $('marketCash').textContent='💰 $'+cash; $('sell').textContent=`Sell all · $${caught*(8+priceBonus)}`; $('sell').disabled=caught===0; $('ammo').innerHTML=Array.from({length:clipMax},(_,i)=>`<i class="shell ${i>=clip?'empty':''}"></i>`).join('');$('day').textContent=`DAY ${day} · ${day===1?'THE OPENING FLIGHT':'FIELD DAY '+day}`;$('reload').disabled=clip===clipMax||caught>=capacity;
+}
+function showToast(msg){let e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),1350)}
+function buy(id){let u=upgrades.find(a=>a.id===id),lv=levels[id],cost=u.base*(lv+1);if(lv>=u.max||cash<cost)return;cash-=cost;levels[id]++;if(id==='bag')capacity+=2;if(id==='scope')shotRadius+=13;if(id==='shells'){clipMax+=2;clip=clipMax}if(id==='price')priceBonus+=3;renderUpgrades();updateUI();showToast(`${u.name} upgraded!`)}
+function renderUpgrades(){ $('upgrades').innerHTML=upgrades.map(u=>{let lv=levels[u.id],cost=u.base*(lv+1),done=lv>=u.max;return `<button class="upgrade" data-id="${u.id}" ${done||cash<cost?'disabled':''}><span class="icon">${u.icon}</span><strong>${u.name} <span style="color:#98a09a;font:600 10px 'DM Sans'">${lv}/${u.max}</span></strong><small>${u.desc}</small><em>${done?'MAXED OUT':'🪙 '+cost+' coins'}</em></button>`}).join('');document.querySelectorAll('.upgrade').forEach(b=>b.onclick=()=>buy(b.dataset.id))}
+function shoot(){if(scene!=='field'||marketOpen||cooldown>0)return;if(clip<=0){showToast('Click! Out of shells — reload!');return}if(caught>=capacity){showToast('Basket full! Turn right and sell.');return}clip--;cooldown=.24;shots.push({x:aim.x,y:aim.y,life:.17});let hit=null,dist=shotRadius;for(let b of birds){if(!b.alive)continue;let d=Math.hypot(b.x-aim.x,b.y-aim.y);if(d<dist){dist=d;hit=b}}
+if(hit){hit.alive=false;caught++;for(let i=0;i<12;i++)particles.push({x:hit.x,y:hit.y,vx:rand(-90,90),vy:rand(-120,40),life:rand(.35,.8),c:i%3?'#fff1c4':'#f28a64',size:rand(2,5)});showToast(['Bullseye!','Feathered fortune!','Got one!','Nice pop!'][Math.floor(Math.random()*4)]);if(caught>=capacity)showToast('Basket full! Head to the market →')}else{for(let i=0;i<7;i++)particles.push({x:aim.x,y:aim.y,vx:rand(-65,65),vy:rand(-65,65),life:.22,c:'#fff0c0',size:3})}updateUI()}
+function reload(){if(clip===clipMax)return;clip=clipMax;showToast('Ka-chunk! Back in business.');updateUI()}
+function openMarket(){scene='market';marketOpen=true;$('market').classList.add('open');renderUpgrades();updateUI()}
+function closeMarket(){scene='field';marketOpen=false;$('market').classList.remove('open')}
+function sell(){if(!caught)return;let amount=caught*(8+priceBonus);cash+=amount;caught=0;day++;showToast(`A tidy $${amount}!`);renderUpgrades();updateUI()}
+$('turn').onclick=openMarket;$('closeMarket').onclick=closeMarket;$('backHunt').onclick=closeMarket;$('sell').onclick=sell;$('reload').onclick=reload;$('shoot').onclick=shoot;$('market').addEventListener('click',e=>{if(e.target===$('market'))closeMarket()});
+canvas.addEventListener('pointermove',e=>{let r=canvas.getBoundingClientRect();aim.x=(e.clientX-r.left)/r.width*W;aim.y=(e.clientY-r.top)/r.height*H});canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){let r=canvas.getBoundingClientRect();aim.x=(e.clientX-r.left)/r.width*W;aim.y=(e.clientY-r.top)/r.height*H}shoot()});window.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();shoot()}if(e.key.toLowerCase()==='r')reload();if(e.key.toLowerCase()==='e'){marketOpen?closeMarket():openMarket()}if(e.key==='Escape'&&marketOpen)closeMarket()});
+function frame(ts){let t=ts/1000,dt=Math.min(.04,(ts-last)/1000||0);last=ts;cooldown=Math.max(0,cooldown-dt);if(scene==='field'){spawnTimer+=dt;if(spawnTimer>1.3){spawn();spawnTimer=0}for(let b of birds){b.x+=b.speed*dt;b.y=b.baseY+Math.sin(t*3+b.phase)*8}birds=birds.filter(b=>b.x>-80&&b.x<W+80);for(let p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=120*dt;p.life-=dt}particles=particles.filter(p=>p.life>0);shots.forEach(s=>s.life-=dt);shots=shots.filter(s=>s.life>0)}ctx.clearRect(0,0,W,H);if(scene==='field'){drawField(t);birds.forEach(b=>drawBird(b,t));particles.forEach(p=>{ctx.globalAlpha=clamp(p.life*2,0,1);ellipse(p.x,p.y,p.size,p.size,p.c)});ctx.globalAlpha=1;shots.forEach(s=>{ctx.globalAlpha=clamp(s.life*5,0,1);ellipse(s.x,s.y,17,17,'#fff1ae');ctx.globalAlpha=1});if(!marketOpen){ctx.strokeStyle='#fffdf0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(aim.x,aim.y,10,0,Math.PI*2);ctx.moveTo(aim.x-16,aim.y);ctx.lineTo(aim.x-6,aim.y);ctx.moveTo(aim.x+6,aim.y);ctx.lineTo(aim.x+16,aim.y);ctx.moveTo(aim.x,aim.y-16);ctx.lineTo(aim.x,aim.y-6);ctx.moveTo(aim.x,aim.y+6);ctx.lineTo(aim.x,aim.y+16);ctx.stroke();ctx.fillStyle='#3c5555';ctx.beginPath();ctx.arc(aim.x,aim.y,2,0,Math.PI*2);ctx.fill()}}else drawMarket(t);requestAnimationFrame(frame)}
+renderUpgrades();updateUI();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
